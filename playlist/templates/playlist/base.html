@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-cookies.js"></script>
+    <script src="/static/playlist/js/app.js"></script>
+    <script src="/static/playlist/js/controller.js"></script>
+	<title>Music Player</title>
+</head>
+<body ng-app="myApp" ng-controller = "mainController">
+{% csrf_token %}
+{% block content %}
+{% endblock%}
+</body>
+</html>

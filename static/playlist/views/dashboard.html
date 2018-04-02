@@ -1,0 +1,21 @@
+<h1>User Playlist</h1>
+<ul>
+	<li ng-repeat = "playlist in userPlaylist"><a href = "#!/playlist/[[playlist.id]]" >[[playlist.name]]</a><span><a href = "" ng-click="remove_playlist(playlist.id)">X</a></span></li>		
+</ul>
+<input type = "text" ng-model="newPlaylist"/>
+<button ng-click="create_playlist(newPlaylist)">Create Playlist</button>
+<hr/>
+<h1>Add Songs</h1>
+</select>
+<table>
+	<tr>
+		<td>Songname</td>
+		<td>Artist</td>
+		<td>Add To Playlist</td>
+	</tr>
+	<tr ng-repeat = "song in songList">
+		<td>[[song.name]]</td>
+		<td>[[song.artist]]</td>
+		<td><select ng-options = "playlist.name for playlist in userPlaylist" ng-model = "selectPlaylist"></select><button ng-click = "song_add(selectPlaylist.id, song.id)">Add</button></td>
+	</tr>
+</table>
