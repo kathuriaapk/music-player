@@ -4,10 +4,11 @@
 </ul>
 <input type = "text" ng-model="newPlaylist"/>
 <button ng-click="create_playlist(newPlaylist)">Create Playlist</button>
+<h3 ng-show = "userPlaylist.length == 0">No Playlist Exist.Create One..</h3>
 <hr/>
 <h1>Add Songs</h1>
-</select>
-<table>
+<h3>No Records Found.</h3>
+<table ng-show ="songList.length != 0" >
 	<tr>
 		<td>Songname</td>
 		<td>Artist</td>

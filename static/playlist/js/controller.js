@@ -85,7 +85,7 @@ app.controller('dashboardController', function($scope,$rootScope,$http,$route,$l
         $scope.create_playlist = function(p_name){
             $scope.new_playlist = {};
             $scope.new_playlist['name'] = p_name; 
-            $scope.new_playlist['user'] = 2; 
+            $scope.new_playlist['user'] = $rootScope.login_id; 
                                     
             $http({
                 method:'POST',
