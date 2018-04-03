@@ -8,7 +8,7 @@ Music Player App is designed to provide an online music player that serves all t
 
 Simply, Clone the repository to your local machine 
 ```
-git clone "Repository Name"
+git clone "https://github.com/kathuriaapk/music-player"
 ```
 or 
 
