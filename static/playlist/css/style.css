@@ -1,0 +1,94 @@
+.center {
+	text-align :center;
+}
+.mar-bot-10 {
+	margin-bottom : 10px;
+}
+
+.right {
+	position:absolute;
+	right: 0px;
+}
+
+.margin-20 {
+	margin:20px;
+}
+
+.heading-color {
+	padding: 10px;
+	background-color: #EFD386;
+	color : #151718;
+}
+
+.text-white {
+	color : white;
+}
+
+.dashboard-view {
+	margin:20px;
+	padding:20px;
+	border: 1px solid #DDF2EE;
+	border-radius : 40px;
+}
+
+body{
+	background : #393E41;
+}
+
+.main-heading {
+	text-align : center;
+	color : #EDEDED;
+	font-family : 'Times New Roman', 'Times', 'serif';
+	font-size:50px;
+}
+
+.login-form {
+	position:absolute;
+	left :30%;
+	width:40%;
+	padding : 20px;
+	background : #E7E5DF;
+}
+
+.shape {
+	height : 30px;
+	width:10px;
+	padding-top:5px
+	padding-bottom:5px;
+	background: #DDF2EE;
+}
+
+.playlist-list > li{
+	list-style: none;
+	float:left;
+
+}
+
+.list-name {
+	font-size : 30px;
+	color : #fff;
+}
+
+.rmv-list {
+	padding:10px;
+	font-size : 40px;
+	color : red;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.song-table > th, td {
+    color: white;
+}

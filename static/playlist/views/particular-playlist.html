@@ -1,8 +1,8 @@
-<h1>[[playlistName]]</h1>
+<h1 class="heading-color">[[playlistName]]</h1>
 <table>
 	<tr ng-repeat  = "song in playlistSongs as songs">
-		<td>[[song.name]]</td>
-		<td><button ng-click = "remove_song(song.id)">Remove</button></td>
+		<td class = "text-white">[[song.name]]</td>
+		<td><button ng-click = "remove_song(song.id)" class = "btn btn-primary">Remove</button></td>
 		<td>
 			<audio controls>
 				<source src="[[host + song.file]]" type="audio/mpeg">

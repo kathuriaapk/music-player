@@ -105,6 +105,7 @@ app.controller('dashboardController', function($scope,$rootScope,$http,$route,$l
                 headers:'{ ContentType : application/json}',
                 data:{newSong:song_id},
             }).then(function successCallback(response) {
+                alert("Successfully Added")
             }, function errorCallback(response){
 
             });

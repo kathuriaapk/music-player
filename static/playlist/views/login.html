@@ -1,4 +1,6 @@
-<h3>Login Here To Access Playlist:</h3>
-<input type = "text" placeholder = "Username" ng-model = "loginData.username"/>
-<input type = "password" placeholder = "Password" ng-model = "loginData.password"/>
-<button ng-click = "login(loginData)">Log In</button>
+<form class = "login-form" ng-submit = login(loginData)> 
+	<h3 class = "center">Login Here To Access Playlist:</h3>
+	<input type = "text" class = "form-control mar-bot-10" placeholder = "Username" ng-model = "loginData.username" required/>
+	<input type = "password" class = "form-control mar-bot-10" placeholder = "Password" ng-model = "loginData.password" required/>
+	<button type = "submit" class = "btn btn-primary">Log In</button>
+</form>
