@@ -58,6 +58,20 @@ Install Django Rest Framework
 ```
 pip install djangorestframework
 ```
+
+DATABASE SETUP
+
+Django uses lightweight sqlite database as default database.
+
+To use Postgresql database :
+
+- Install Postgresql and set up your database. (https://www.postgresql.org/)
+
+- Install the python dependency for postgresql database.
+
+```
+pip install psycopg2
+```
 Using the instructions above you have successfully created an environment for running app.
 
 ## Usage
@@ -67,6 +81,21 @@ Using the instructions above you have successfully created an environment for ru
 Follow the simple steps :
 
 - Navigate to the project directory Music-Player
+
+- For Postgresql users, Enter the database details in music_player/settings.py :
+
+```
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME':'DATABASENAME',
+        'USER':'USERNAME',
+        'PASSWORD':'PASSWORD',
+        'HOST':'HOSTNAME',
+        'PORT':''
+    }
+}
+```
 
 - Use following command to migrate the initial migrations :
 
