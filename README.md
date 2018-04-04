@@ -124,3 +124,15 @@ App uses inbuilt admin interface, so navigate '127.0.0.1:8000/admin' and enter s
 - Add Users, Add Songs
 
 - Navigate to '127.0.0.1:8000', enter user details and login to access playlist of the user. 
+
+
+## FOR DEMO VISIT :-
+
+http://kathuriaapk.pythonanywhere.com
+
+Login Details :
+
+```
+Username :- user123
+Password :- password123
+```
