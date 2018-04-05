@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from rest_framework.parsers import JSONParser
@@ -17,10 +18,11 @@ def login_user(request):
 		user = authenticate(username=username, password = password)
 		if user is not None:
 			login(request, user)
-			return HttpResponse(request.user.id)
+			user = {'user_id':request.user.id, 'username':request.user.username}
+			return HttpResponse(json.dumps(user), content_type="application/json")
 	return HttpResponse(status=404)
 
-def logout_user(request):
+def logout_user(request):	
 	logout(request)
 	return HttpResponse('logout')
 
@@ -28,6 +30,7 @@ def playlist_list(request):
 	if request.method == 'GET':
 		playlist = Playlist.objects.filter(user=request.user)
 		serializer = PlaylistSerializer(playlist, many=True)
+		print(serializer)
 		return JsonResponse(serializer.data, safe=False)
 
 	elif request.method == 'POST':
@@ -40,7 +43,7 @@ def playlist_list(request):
 
 def playlist_detail(request, pk):
 	try:
-		playlist = Playlist.objects.get(pk=pk)
+		playlist = Playlist.objects.get(pk=pk , user=request.user)
 	except Playlist.DoesNotExist:
 		return HttpResponse(status=404)
 
@@ -77,11 +80,14 @@ def song_list(request):
 
 
 def song_for_playlist(request, p_id):
+	try:
+		song = Song.objects.filter(playlist=Playlist.objects.get(pk = p_id, user = request.user))
+	except	(Playlist.DoesNotExist, Song.DoesNotExist):
+		return HttpResponse(status=404)
+	
 	if request.method == 'GET':
-		song = Song.objects.filter(playlist=p_id)
 		serializer = SongSerializer(song, many=True)
 		return JsonResponse(serializer.data, safe=False)
-
 
 
 	

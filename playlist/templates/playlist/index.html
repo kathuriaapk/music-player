@@ -1,7 +1,7 @@
 {% extends "playlist/base.html" %}
 {% block content %}
-    <p class = "main-heading" >Music Player</p>
+    <p class = "main-heading">Music Player</p>
+    <p class = "text-white"  ng-show = "login">Welcome [[username]]</p>
     <button ng-click = "logout()" ng-show="login" class = "btn btn-default margin-20">Logout</button>
-    	<div ng-view></div>
-	</div>
+    <div ng-view></div>
 {% endblock %}

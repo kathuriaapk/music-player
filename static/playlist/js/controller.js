@@ -1,5 +1,6 @@
 app.controller('mainController', function($scope, $rootScope, $http, $cookies,$location){
     $rootScope.login_id = $cookies.get('login_id');
+    $rootScope.username = $cookies.get('username');
     if ($rootScope.login_id != undefined){
         $rootScope.login = true;
     } else {
@@ -12,7 +13,7 @@ app.controller('mainController', function($scope, $rootScope, $http, $cookies,$l
                 url: '/logout/',
         }).then(function successCallback(response) {
             $scope.status = response;
-            $cookies.remove('login_id');
+            $cookies.remove('login_id','username');
             $rootScope.login = false;
             $location.path('/');
         }, function errorCallback(response){          
@@ -32,8 +33,10 @@ app.controller('loginController', function($scope,$rootScope,$cookies, $http,$lo
                 data:log_data
             }).then(function successCallback(response) {
                 $scope.user = response.data;
-                $cookies.put('login_id', $scope.user);
-                $rootScope.login_id = $scope.user;
+                $cookies.put('login_id', $scope.user.user_id);
+                $cookies.put('username', $scope.user.username);
+                $rootScope.login_id = $scope.user.user_id;
+                $rootScope.username = $scope.user.username;
                 $rootScope.login = true;
                 $location.path('/dashboard/' + $rootScope.login_id);
             }, function errorCallback(response){          
@@ -47,14 +50,15 @@ app.controller('loginController', function($scope,$rootScope,$cookies, $http,$lo
 });
 
 app.controller('dashboardController', function($scope,$rootScope,$http,$route,$location){
+    $scope.username = $rootScope.username;
     if ($rootScope.login == true) {
         current_view = $location.path();
+        $scope.username = $rootScope.username;
         $http({
             method:'GET',
             url: hostUrl + '/api/playlist/',
         }).then(function successCallback(response) {
-            $scope.userPlaylist = response.data;
-            console.log($scope.userPlaylist.keys())            
+            $scope.userPlaylist = response.data;            
         }, function errorCallback(response){
 
         });
@@ -118,10 +122,11 @@ app.controller('dashboardController', function($scope,$rootScope,$http,$route,$l
 app.controller('activePlaylistController', function($scope,$rootScope,$cookies, $http, $route, $location, $routeParams){
     if ($rootScope.login == true) {
         $scope.host = hostUrl;
-        $scope.currentPlaylist = $routeParams.p_id;
+        $scope.currentPlaylistName = $routeParams.p_name;
+        $scope.currentPlaylistId = $routeParams.p_id;
         $http({
             method:'GET',
-            url: hostUrl + '/api/playlistsongs/' + $scope.currentPlaylist + '/',
+            url: hostUrl + '/api/playlistsongs/' + $scope.currentPlaylistId + '/',
         }).then(function successCallback(response) {
             $scope.playlistSongs = response.data;
         }, function errorCallback(response){          
@@ -130,7 +135,7 @@ app.controller('activePlaylistController', function($scope,$rootScope,$cookies, 
         $scope.remove_song = function(song_id){
             $http({
                 method:'PATCH',
-                url: hostUrl + '/api/playlist/' + $scope.currentPlaylist + '/' ,
+                url: hostUrl + '/api/playlist/' + $scope.currentPlaylistId + '/' ,
                 headers: '{ ContentType : application/json }',
                 data : {removeSong:song_id}
             }).then(function successCallback(response) {

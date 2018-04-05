@@ -1,4 +1,5 @@
-<h1 class="heading-color">[[playlistName]]</h1>
+<h1 class="heading-color">[[currentPlaylistName]]</h1>
+<h3 class = "text-white" ng-show = "playlistSongs.length == 0">No Song Added Yet</h3>
 <table>
 	<tr ng-repeat  = "song in playlistSongs as songs">
 		<td class = "text-white">[[song.name]]</td>

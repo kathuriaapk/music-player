@@ -1,7 +1,7 @@
 <div class = "dashboard-view">
 	<h2 class = "heading-color center">User Playlist</h2>
 	<ul class = "playlist-list row">
-		<li ng-repeat = "playlist in userPlaylist" class = "col-lg-3"><span class = "shape"></span><a href = "#!/playlist/[[playlist.id]]" class = "list-name" >[[$index +  1]]. [[playlist.name]]</a><span> <a href = "" ng-click="remove_playlist(playlist.id)" class = "rmv-list"> X</a></span></li>		
+		<li ng-repeat = "playlist in userPlaylist" class = "col-lg-3"><span class = "shape"></span><a href = "#!/playlist/[[playlist.name]]/[[playlist.id]]" class = "list-name" >[[$index +  1]]. [[playlist.name]]</a><span> <a href = "" ng-click="remove_playlist(playlist.id)" class = "rmv-list"> X</a></span></li>		
 	</ul>
 	<h3 ng-show = "userPlaylist.length == 0" class = "text-white">No Playlist Exist. Create One..</h3>
 	<div class = "create-list margin-20">

@@ -27,7 +27,7 @@ app.config(function($routeProvider) {
         controller: 'dashboardController'
 
     })
-    .when("/playlist/:p_id", {
+    .when("/playlist/:p_name/:p_id", {
         templateUrl : viewsUrl + '/particular-playlist.html',
         controller :'activePlaylistController'
     })
