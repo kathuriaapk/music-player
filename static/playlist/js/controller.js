@@ -1,8 +1,9 @@
-app.controller('mainController', function($scope, $rootScope, $http, $cookies,$location){
-    $rootScope.login_id = $cookies.get('login_id');
-    $rootScope.username = $cookies.get('username');
+app.controller('mainController', function($scope, $rootScope, $http, $cookies, $location){
+    $rootScope.login_id = $cookies.get('user_id');
+    $rootScope.username = $cookies.get('user_name');
     if ($rootScope.login_id != undefined){
         $rootScope.login = true;
+        $location.path('/dashboard/' + $rootScope.login_id);        
     } else {
         $rootScope.login = false;
     }
@@ -13,7 +14,6 @@ app.controller('mainController', function($scope, $rootScope, $http, $cookies,$l
                 url: '/logout/',
         }).then(function successCallback(response) {
             $scope.status = response;
-            $cookies.remove('login_id','username');
             $rootScope.login = false;
             $location.path('/');
         }, function errorCallback(response){          
@@ -22,7 +22,7 @@ app.controller('mainController', function($scope, $rootScope, $http, $cookies,$l
     }
 });
 
-app.controller('loginController', function($scope,$rootScope,$cookies, $http,$location){
+app.controller('loginController', function($scope, $rootScope, $http, $route, $cookies, $location){
     if ($rootScope.login != true) {
         $scope.loginData = {};
         $scope.login = function(log_data){
@@ -32,15 +32,14 @@ app.controller('loginController', function($scope,$rootScope,$cookies, $http,$lo
                 headers:'{ ContentType : application/x-www-form-urlencoded}',
                 data:log_data
             }).then(function successCallback(response) {
-                $scope.user = response.data;
-                $cookies.put('login_id', $scope.user.user_id);
-                $cookies.put('username', $scope.user.username);
-                $rootScope.login_id = $scope.user.user_id;
-                $rootScope.username = $scope.user.username;
+                $rootScope.login_id = $cookies.get('user_id');
+                $rootScope.username = $cookies.get('user_name');
                 $rootScope.login = true;
-                $location.path('/dashboard/' + $rootScope.login_id);
+                $route.reload();
             }, function errorCallback(response){          
-
+                if (response.status == '404'){
+                    $scope.errormessage = 'User Not Found';
+                }
             });
         }
     } else {

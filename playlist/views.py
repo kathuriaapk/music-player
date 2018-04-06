@@ -5,6 +5,7 @@ from rest_framework.parsers import JSONParser
 from django.contrib.auth import authenticate, login, logout
 from .models import *
 from .serializers import *
+import datetime
 
 # Create your views here.
 def index(request):
@@ -18,13 +19,18 @@ def login_user(request):
 		user = authenticate(username=username, password = password)
 		if user is not None:
 			login(request, user)
-			user = {'user_id':request.user.id, 'username':request.user.username}
-			return HttpResponse(json.dumps(user), content_type="application/json")
+			response = HttpResponse("")
+			response.set_cookie('user_name', request.user.username)
+			response.set_cookie('user_id', request.user.id)
+			return response
 	return HttpResponse(status=404)
 
 def logout_user(request):	
 	logout(request)
-	return HttpResponse('logout')
+	response = HttpResponse('')
+	response.delete_cookie('user_name')
+	response.delete_cookie('user_id')
+	return response
 
 def playlist_list(request):
 	if request.method == 'GET':
